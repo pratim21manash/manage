@@ -16,7 +16,12 @@ const createTask = async (taskData, createdBy) => {
     createdBy,
   });
 
-  return await task.populate("assignedTo", "fullname email mobile").populate("createdBy", "fullname email");
+  // FIXED: populate separately instead of chaining
+  const populatedTask = await TaskModel.findById(task._id)
+    .populate("assignedTo", "fullname email mobile")
+    .populate("createdBy", "fullname email");
+
+  return populatedTask;
 };
 
 const getAllTasks = async (userId, userRole, filters = {}, page = 1, limit = 10) => {
@@ -121,7 +126,6 @@ const getTaskStats = async (userId, userRole) => {
   let query = {};
 
   if (userRole === "employee") {
-    // Fix: Cast userId to ObjectId for aggregation pipeline
     query = { assignedTo: new mongoose.Types.ObjectId(userId) };
   }
 

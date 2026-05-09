@@ -25,6 +25,11 @@ const signupValidation = [
     .isLength({ min: 10, max: 10 })
     .withMessage("Mobile number must be 10 digits"),
   body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
+  // ADDED: role validation
+  body("role")
+    .optional()
+    .isIn(["admin", "employee"])
+    .withMessage("Role must be either admin or employee"),
 ];
 
 const loginValidation = [

@@ -5,8 +5,7 @@ import { getCookieOptions } from "../utils/token.util.js";
 const signup = async (req, res) => {
   try {
     const userData = {
-      ...req.body,
-      role: "employee",
+      ...req.body
     };
 
     const user = await signupService(userData);
