@@ -1,5 +1,5 @@
 const corsConfig = {
-  origin: process.env.CLIENT || "http://localhost:5173",
+  origin: process.env.CLIENT || "http://localhost:3000",
   credentials: true,
 };
 
